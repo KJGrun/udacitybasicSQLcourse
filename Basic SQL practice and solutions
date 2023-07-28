@@ -51,3 +51,194 @@ SELECT id, account_id, total_amt_usd
 FROM orders
 ORDER BY  total_amt_usd DESC, account_id 
 
+Practicing WHERE
+
+Practice task: Write a query that pulls the first 5 rows and all columns from the orders table that have a dollar amount of gloss_amt_usd greater than or equal to 1000
+
+Solution:
+
+SELECT *
+FROM orders
+WHERE gloss_amt_usd >= 1000
+LIMIT 5
+
+Practice task: Write a query that pulls the first 10 rows and all columns from the orders table that have a total_amt_usd less than 500
+
+Solution:
+
+SELECT *
+FROM orders
+Where total_amt_usd < 500
+LIMIT 10
+
+Practicing WHERE with non-numeric data
+
+Practice task: Filter the accounts table to include the company name, website, and the primary point of contact (primary_poc) just for the Exxon Mobil company in the accounts table. Practice task: Filter the accounts table to include the company name, website, and the primary point of contact (primary_poc) just for the Exxon Mobil company in the accounts table. 
+
+Solution:
+
+SELECT name, website, primary_poc
+FROM accounts
+WHERE name = 'Exxon Mobil'
+
+Practicing arithmic operators
+
+Practice task: create a column that divides the standard_amt_usd by the standard_qty to find the unit price for standard paper for each order. Limit the results to the first 10 orders and include the id and account_id fields.
+
+Solution:
+
+SELECT id, account_id, standard_amt_usd/standard_qty AS unit_price
+FROM orders
+LIMIT 10
+
+Practicing LIKE
+
+Practice task: Use the accounts table to find all the company whose names start with 'C'
+
+Solution:
+
+SELECT name 
+FROM accounts
+WHERE name LIKE 'C%'
+
+Practice task: Use the accounts table to find all companies whose names contain the string 'one' somewhere in the name
+
+Solution:
+
+SELECT name 
+FROM accounts
+WHERE name LIKE '%one%'
+
+Practice task: Use the accounts table to find all companies whose names end with 's'
+
+Solution:
+
+SELECT name 
+FROM accounts
+WHERE name LIKE '%s'
+
+Practicing IN 
+
+Practice task: Use the account table to find the account name, primary_poc, and sales_rep_id for Walmart, Target, and Nordstrom
+
+Solution:
+
+SELECT name, primary_poc, sales_rep_id
+FROM accounts
+WHERE name IN ('Walmart', 'Target', 'Nordstrom')
+
+Practice task: Use the web_events table to find all the information regarding indiviuals who are connected via the channel of organic or adwords
+
+Solution:
+
+SELECT *
+FROM web_events
+WHERE channel IN ('organic', 'adwords')
+
+Practicing NOT 
+
+Practice task: Use the accounts table to find the account name, primary poc, and sales rep id for all stores except Walmart, Target, and Nordstrom
+
+Solution:
+
+SELECT name, primary_poc, sales_rep_id 
+FROM accounts
+WHERE name NOT IN ('Walmart', 'Target', 'Nordstrom')
+
+Practice task: Use the web_events table to find all the information regarding individuals were were connected via any method except using organic or adwords methods
+
+Solution:
+
+SELECT * 
+FROM web_events
+WHERE channel NOT IN ('organic', 'adwords')
+
+Practice task: use the accounts table to find all the companies whose names do not start with "C"
+
+Solution:
+
+SELECT name
+FROM accounts
+WHERE name NOT LIKE 'C%'
+
+Practice task: use the accounts table to find all the companies whose names do not contain the string "one" somewhere in the name
+
+Solution:
+
+SELECT name
+FROM accounts
+WHERE name NOT LIKE '%one%'
+
+Practice task: Use the accounts table to find all the companies whose names do not end with "s"
+
+Solution:
+
+SELECT name
+FROM accounts
+WHERE name NOT LIKE '%s'
+
+Practicing AND and BETWEEN
+
+Practice task: Write a query that returns all orders where the standard_qty is over 1000, the poster_qty is 0, and the gloss_qty is 0
+
+Solution:
+
+SELECT * 
+FROM orders
+WHERE standard_qty > 1000 AND poster_qty = 0 AND gloss_qty = 0
+
+Practice task: Find the accounts table to find all the companies whose names do not start with C and do not end with s
+
+Solution:
+
+SELECT name 
+FROM accounts
+WHERE name NOT LIKE 'C%' AND name NOT LIKE '%s'
+
+Practice task: Write a query that displays the order date and gloss_qty data for all orders where gloss_qty is between 24 and 29
+
+Solution:
+
+SELECT occurred_at, gloss_qty
+FROM orders
+WHERE gloss_qty BETWEEN 24 AND 29
+
+Practice task: Use the web_events table to find all information regarding individuals who were contacted via organic or adwords channels, and started their account at any point in 2016, sorted from newest to oldest
+
+Solution:
+
+SELECT *
+FROM web_events
+WHERE channel IN ('organic', 'adwords') AND occurred_at BETWEEN '2016-01-01' AND '2017-01-01' 
+ORDER BY occurred_at DESC
+
+Practicing OR
+
+Practice task: Find list of order IDs where either gloss_qty or poster_qty is greater than 4000. only include the id field in the resulting table
+
+Solution:
+
+SELECT id 
+FROM orders
+WHERE gloss_qty > 4000 or poster_qty > 4000
+
+Practice task: Write a query that returns a list of orders where the standard_qty is zero and either the gloss_qty or poster_qty is over 1000
+
+Solution:
+
+SELECT *
+FROM orders 
+WHERE standard_qty = 0 AND (gloss_qty > 1000 OR poster_qty > 1000)
+
+Practice task: Find all the companies names that start with "C" or "W", and the primary contact contains "ana" or "Ana" but does not include "eana"
+
+Solution: 
+
+SELECT name 
+FROM accounts
+WHERE (name LIKE 'C%' OR name LIKE 'W%')
+AND ((primary_poc LIKE '%ana%' OR primary_poc LIKE '%Ana%')
+AND primary_poc NOT LIKE '%eana%')
+
+
+
